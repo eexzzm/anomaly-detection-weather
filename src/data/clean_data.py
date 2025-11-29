@@ -5,7 +5,7 @@ error_col = [
 ]
 
 drop_col = [
-    'Tpot (K)', 'VPmax (mbar)', 'sh (g/kg)', 'H2OC (mmol/mol)', 'rho (g/m³)'
+    'Tpot (K)', 'VPmax (mbar)', 'sh (g/kg)', 'H2OC (mmol/mol)', 'rho (g/m**3)'
 ]
 
 def clean_error_values(df):
@@ -19,7 +19,10 @@ def clean_error_values(df):
     return df
     
 def clean_data(df):
-    df["Date Time"] = pd.to_datetime(df["Date Time"], format='%d.%m.%y %H:%M:%S', errors='coerce')
+    df = df.copy()
+    
+    df = df.drop_duplicates()
+    df["Date Time"] = pd.to_datetime(df["Date Time"], dayfirst=True)
     df = df.drop(columns=drop_col, axis=1) 
     df = clean_error_values(df)
     
