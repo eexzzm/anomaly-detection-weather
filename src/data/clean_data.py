@@ -26,4 +26,8 @@ def clean_data(df):
     df = df.drop(columns=drop_col, axis=1) 
     df = clean_error_values(df)
     
+    cutoff = pd.Timestamp("2016-12-31 23:59:59")
+    df = df[df["Date Time"] <= cutoff]
+    df = df.sort_values("Date Time").reset_index(drop=True)
+    
     return df
