@@ -1,3 +1,5 @@
+dataset: https://www.kaggle.com/datasets/mnassrib/jena-climate
+
 The goal is a system that ingests recent weather observations and emits anomaly alerts
 
 Detecting 'anomaly' or an extreme weather event. Detect atmospheric outliers:
