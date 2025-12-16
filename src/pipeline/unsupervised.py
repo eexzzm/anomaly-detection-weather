@@ -1,6 +1,6 @@
 from sklearn.ensemble import IsolationForest
 from sklearn.neighbors import LocalOutlierFactor
-from sklearn.svm import OneClassSVM
+from pathlib import Path
 import joblib
 
 class UnsupervisedModel:
@@ -15,3 +15,12 @@ class UnsupervisedModel:
     def save(self, path):
         joblib.dump(self.iso, f"{path}/isoforest.pkl")
         joblib.dump(self.lof, f"{path}/lof.pkl")
+    
+    @staticmethod
+    def load(model_dir: Path):
+        models = UnsupervisedModel()
+        
+        models.iso = joblib.load(model_dir / "isoforest.pkl")
+        models.lof = joblib.load(model_dir / "lof.pkl")
+        
+        return models
